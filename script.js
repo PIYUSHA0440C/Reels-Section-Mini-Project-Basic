@@ -1,8 +1,11 @@
 let allReels = document.querySelector('.all-reels')
 
+
+
 const reels = [
     {
-        userName: "aarav.codes",
+      isMuted: true,
+      userName: "aarav.codes",
       likeCount: 12450,
       isLiked: true,
       commentCount: 342,
@@ -13,7 +16,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1527980965255-d3b416303d12"
     },
     {
-        userName: "travel.with.isha",
+      isMuted: true,
+      userName: "travel.with.isha",
       likeCount: 9821,
       isLiked: false,
       commentCount: 210,
@@ -24,7 +28,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe"
     },
     {
-        userName: "fit.with.rohan",
+      isMuted: true,
+      userName: "fit.with.rohan",
       likeCount: 18340,
       isLiked: true,
       commentCount: 488,
@@ -35,7 +40,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39"
     },
     {
-        userName: "design.by.nina",
+      isMuted: true,
+      userName: "design.by.nina",
       likeCount: 6543,
       isLiked: false,
       commentCount: 97,
@@ -46,7 +52,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
     },
     {
-        userName: "techwithdev",
+      isMuted: true,
+      userName: "techwithdev",
       likeCount: 22110,
       isLiked: true,
       commentCount: 612,
@@ -57,7 +64,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"
     },
     {
-        userName: "foodie.ananya",
+      isMuted: true,
+      userName: "foodie.ananya",
       likeCount: 14320,
       isLiked: false,
       commentCount: 301,
@@ -68,7 +76,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1"
     },
     {
-        userName: "startup.diaries",
+      isMuted: true,
+      userName: "startup.diaries",
       likeCount: 8904,
       isLiked: true,
       commentCount: 156,
@@ -79,7 +88,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
     },
     {
-        userName: "daily.ai.bytes",
+      isMuted: true,
+      userName: "daily.ai.bytes",
       likeCount: 19560,
       isLiked: true,
       commentCount: 540,
@@ -90,7 +100,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61"
     },
     {
-        userName: "life.of.kabir",
+      isMuted: true,
+      userName: "life.of.kabir",
       likeCount: 4321,
       isLiked: false,
       commentCount: 88,
@@ -101,7 +112,8 @@ const reels = [
       userProfile: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
     },
     {
-        userName: "code.after.dark",
+      isMuted: true,
+      userName: "code.after.dark",
       likeCount: 16780,
       isLiked: true,
       commentCount: 401,
@@ -119,8 +131,11 @@ function addData(){let sum = ''
   reels.forEach((elem,idx)=>{
       sum = sum + `
                   <div class="reel">
-                      <video class="videos" src="${elem.video}" autoplay loop muted ></video>
-  
+                      <video class="videos" src="${elem.video}" autoplay loop ${elem.isMuted? 'muted':''} ></video>
+                      
+                      <div id="${idx}" class="mute">
+                          ${elem.isMuted?'<i class="ri-volume-mute-fill"></i>':'<i class="ri-volume-up-line"></i>'}
+                      </div>  
                       <div class="bottom">
                           <div class="user">
                               <img src="${elem.userProfile}" alt="">
@@ -164,6 +179,27 @@ allReels.addEventListener('click',(dets)=>{
       reels[dets.target.id].likeCount--
       reels[dets.target.id].isLiked = false
     }
-  }
+    
   addData()
+  }
+
+  if(dets.target.className == 'follow'){
+    if(reels[dets.target.id].isFollowed){
+      reels[dets.target.id].isFollowed = false
+    } else{
+      reels[dets.target.id].isFollowed = true
+    }
+    
+  addData()
+  }
+  
+  if(dets.target.className == 'mute'){
+    if(!(reels[dets.target.id].isMuted)){
+      reels[dets.target.id].isMuted = true
+    } else {
+      reels[dets.target.id].isMuted = false
+    }
+    
+  addData()
+  }
 })

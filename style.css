@@ -17,9 +17,31 @@ main {
   padding: 20px;
   background: linear-gradient(to right bottom, rgb(26, 26, 26), rgb(35, 35, 35), black);
 }
+main .mute {
+  height: 40px;
+  width: 40px;
+  color: white;
+  background-color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+main .mute i {
+  font-size: 1.3rem;
+  pointer-events: none;
+}
+main .mute:active {
+  scale: 0.95;
+}
 main section {
   height: 100%;
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   background-color: black;
   border-radius: 10px;
   margin: auto;
