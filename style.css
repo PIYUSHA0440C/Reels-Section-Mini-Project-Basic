@@ -23,6 +23,7 @@ main section {
   background-color: black;
   border-radius: 10px;
   margin: auto;
+  overflow: hidden;
 }
 main section .all-reels {
   height: 100%;
@@ -35,6 +36,7 @@ main section .all-reels .reel {
   height: 100%;
   width: 100%;
   position: relative;
+  overflow: hidden;
   border-radius: 10px;
   margin-bottom: 20px;
   scroll-snap-align: start;
@@ -91,6 +93,7 @@ main section .all-reels .reel .right {
   width: 40px;
   padding: 30px;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 15px;
   position: absolute;
@@ -98,6 +101,9 @@ main section .all-reels .reel .right {
   right: 0;
   bottom: 0%;
   text-align: center;
+}
+main section .all-reels .reel .right .like {
+  cursor: pointer;
 }
 main section .all-reels .reel .right .like .liked {
   color: rgb(255, 0, 85);
@@ -118,6 +124,13 @@ main section .all-reels .reel .right > div {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 50px;
+}
+main section .all-reels .reel .right > div h4 {
+  pointer-events: none;
+}
+main section .all-reels .reel .right > div h6 {
+  pointer-events: none;
 }
 main section .all-reels::-webkit-scrollbar {
   display: none;

@@ -113,47 +113,57 @@ const reels = [
     }
 ];
 
-let sum = ''
-reels.forEach((elem)=>{
-    sum = sum + `
-                <div class="reel">
-                    <video class="videos" src="${elem.video}" autoplay loop muted ></video>
 
-                    <div class="bottom">
-                        <div class="user">
-                            <img src="${elem.userProfile}" alt="">
-                            <h4>${elem.userName}</h4>
-                            <button>${elem.isFollowed?'Unfollow':'Follow'}</button>
-                        </div>
-                        <h3>${elem.caption}</h3>
-                    </div>
-                    <div class="right">
-                        <div class="like">
-                            <h4 id="like-icon">${elem.isLiked ?'<i class="liked ri-heart-fill"></i>':'<i class="ri-heart-line"></i>'}</h4>
-                            <h6>${elem.likeCount}</h6>
-                        </div>
-                        <div class="comment">
-                            <h4 id="comment-icon"><i class="ri-chat-3-line"></i></h4>
-                            <h6>${elem.commentCount}</h6>
-                        </div>
-                        <div class="share">
-                            <h4 id="share-icon"><i class="ri-share-forward-line"></i></h4>
-                            <h6>${elem.shareCount}</h6>
-                        </div>
-                        <div class="menu">
-                            <h4 id="menu-icon"><i class="ri-more-2-fill"></i></h4>
-                        </div>
-                    </div>
-                </div>`
+
+function addData(){let sum = ''
+  reels.forEach((elem,idx)=>{
+      sum = sum + `
+                  <div class="reel">
+                      <video class="videos" src="${elem.video}" autoplay loop muted ></video>
+  
+                      <div class="bottom">
+                          <div class="user">
+                              <img src="${elem.userProfile}" alt="">
+                              <h4>${elem.userName}</h4>
+                              <button id="${idx}" class="follow">${elem.isFollowed?'Unfollow':'Follow'}</button>
+                          </div>
+                          <h3>${elem.caption}</h3>
+                      </div>
+                      <div class="right">
+                          <div id="${idx}" class="like">
+                              <h4 id="like-icon">${elem.isLiked ?'<i class="liked ri-heart-fill"></i>':'<i class="ri-heart-line"></i>'}</h4>
+                              <h6>${elem.likeCount}</h6>
+                          </div>
+                          <div class="icon comment">
+                              <h4 id="comment-icon"><i class="ri-chat-3-line"></i></h4>
+                              <h6>${elem.commentCount}</h6>
+                          </div>
+                          <div class="icon share">
+                              <h4 id="share-icon"><i class="ri-share-forward-line"></i></h4>
+                              <h6>${elem.shareCount}</h6>
+                          </div>
+                          <div class="icon menu">
+                              <h4 id="menu-icon"><i class="ri-more-2-fill"></i></h4>
+                          </div>
+                      </div>
+                  </div>`
+  })
+  
+  allReels.innerHTML = sum
+}
+addData();
+
+allReels.addEventListener('click',(dets)=>{
+  if(dets.target.className == 'like'){
+    if(!(reels[dets.target.id].isLiked)){
+      reels[dets.target.id].likeCount++
+      console.log(reels);
+      
+      reels[dets.target.id].isLiked = true
+    } else {
+      reels[dets.target.id].likeCount--
+      reels[dets.target.id].isLiked = false
+    }
+  }
+  addData()
 })
-
-
-// let reel = document.querySelectorAll('.reel')
-// let videos = document.querySelectorAll('.videos')
-// reel.addEventListener('click',()=>{
-//     videos.forEach((elem)=>{
-//         elem.muted = false
-//     })
-// })
-
-allReels.innerHTML = sum
